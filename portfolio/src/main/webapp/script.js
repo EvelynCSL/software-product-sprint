@@ -26,3 +26,20 @@ function addRandomGreeting() {
   const greetingContainer = document.getElementById('greeting-container');
   greetingContainer.innerText = greeting;
 }
+
+function addRandomQuote() {
+    const quotes = 
+    ['“Love is putting someone else’s needs before yours.” — Olaf, Frozen',
+    '"You\'ve got a friend in me." — Toy Story', 
+    '"All it takes is faith and trust." — Peter Pan',
+    '"Even miracles take a little time." — Fairy Godmother, Cinderella',
+    '"Don\'t just fly, soar." — Dumbo',
+    '"Ohana means family, family means nobody gets left behind or forgotten" — Lilo and Stitch'];
+    
+    // Pick a random greeting.
+    const quote = quotes[Math.floor(Math.random() * quotes.length)];
+
+    // Add it to the page.
+    const quotesContainer = document.getElementById('quotes-container');
+    quotesContainer.innerText = quote;
+}
