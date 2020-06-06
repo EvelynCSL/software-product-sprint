@@ -13,19 +13,8 @@
 // limitations under the License.
 
 /**
- * Adds a random greeting to the page.
+ * Adds a random quote to the page.
  */
-function addRandomGreeting() {
-  const greetings =
-      ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
-
-  // Pick a random greeting.
-  const greeting = greetings[Math.floor(Math.random() * greetings.length)];
-
-  // Add it to the page.
-  const greetingContainer = document.getElementById('greeting-container');
-  greetingContainer.innerText = greeting;
-}
 
 function addRandomQuote() {
     const quotes = 
@@ -36,7 +25,7 @@ function addRandomQuote() {
     '"Don\'t just fly, soar." — Dumbo',
     '"Ohana means family, family means nobody gets left behind or forgotten" — Lilo and Stitch'];
     
-    // Pick a random greeting.
+    // Pick a random quote.
     const quote = quotes[Math.floor(Math.random() * quotes.length)];
 
     // Add it to the page.
