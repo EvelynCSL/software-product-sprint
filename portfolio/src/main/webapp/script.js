@@ -13,16 +13,22 @@
 // limitations under the License.
 
 /**
- * Adds a random greeting to the page.
+ * Adds a random quote to the page.
  */
-function addRandomGreeting() {
-  const greetings =
-      ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
 
-  // Pick a random greeting.
-  const greeting = greetings[Math.floor(Math.random() * greetings.length)];
+function addRandomQuote() {
+    const quotes = 
+    ['“Love is putting someone else’s needs before yours.” — Olaf, Frozen',
+    '"You\'ve got a friend in me." — Toy Story', 
+    '"All it takes is faith and trust." — Peter Pan',
+    '"Even miracles take a little time." — Fairy Godmother, Cinderella',
+    '"Don\'t just fly, soar." — Dumbo',
+    '"Ohana means family, family means nobody gets left behind or forgotten" — Lilo and Stitch'];
+    
+    // Pick a random quote.
+    const quote = quotes[Math.floor(Math.random() * quotes.length)];
 
-  // Add it to the page.
-  const greetingContainer = document.getElementById('greeting-container');
-  greetingContainer.innerText = greeting;
+    // Add it to the page.
+    const quotesContainer = document.getElementById('quotes-container');
+    quotesContainer.innerText = quote;
 }
