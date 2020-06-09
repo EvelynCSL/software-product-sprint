@@ -7,7 +7,7 @@
         <script src="script.js"></script>
     </head>
 
-    <body>
+    <body onload="getWelcomeMessage()">
         <div id="content">
             <h1><center>Evelyn Chee</center></h1>
             <center><img src="images/avatar.jpg" width="200"/></center>
@@ -26,6 +26,9 @@
 
             <button onclick="addRandomQuote()">Surprise</button>
             <div id="quotes-container"></div>
+
+            <div id="message-container"></div>
+
         </div>
     </body>
 </html>

@@ -32,3 +32,40 @@ function addRandomQuote() {
     const quotesContainer = document.getElementById('quotes-container');
     quotesContainer.innerText = quote;
 }
+
+/**
+ * Fetches the welcome message from the server and adds it to the DOM.
+ */
+function getWelcomeMessage() {
+  console.log('Fetching the welcome message.');
+
+  // The fetch() function returns a Promise because the request is asynchronous.
+  const responsePromise = fetch('/data');
+
+  // When the request is complete, pass the response into handleResponse().
+  responsePromise.then(handleResponse);
+}
+
+/**
+ * Handles response by converting it to text and passing the result to
+ * addQuoteToDom().
+ */
+function handleResponse(response) {
+  console.log('Handling the response.');
+
+  // response.text() returns a Promise, because the response is a stream of
+  // content and not a simple variable.
+  const textPromise = response.text();
+
+  // When the response is converted to text, pass the result into the
+  // addQuoteToDom() function.
+  textPromise.then(addMessageToDom);
+}
+
+/** Adds the welcome message to the DOM. */
+function addMessageToDom(message) {
+  console.log('Adding message to dom: ' + message);
+
+  const messageContainer = document.getElementById('message-container');
+  messageContainer.innerHTML = message;
+}
