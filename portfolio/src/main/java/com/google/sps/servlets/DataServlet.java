@@ -15,7 +15,8 @@
 package com.google.sps.servlets;
 
 import com.google.gson.Gson;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,7 +27,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
-    ArrayList<String> favouriteFruits = new ArrayList<>(Arrays. asList("Mango", "Strawberry", "Grapes"));
+    List<String> favouriteFruits = Arrays.asList("Mango", "Strawberry", "Grapes");
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -39,7 +40,7 @@ public class DataServlet extends HttpServlet {
         response.getWriter().println(json);
     }
 
-    private String convertToJsonUsingGson(ArrayList<String> list) {
+    private String convertToJsonUsingGson(List<String> list) {
         Gson gson = new Gson();
         String json = gson.toJson(list);
         return json;
