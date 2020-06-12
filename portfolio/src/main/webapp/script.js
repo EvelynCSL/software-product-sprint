@@ -34,10 +34,10 @@ function addRandomQuote() {
 }
 
 /**
- * Fetches the welcome message from the server and adds it to the DOM.
+ * Fetches the json message from the server and adds it to the DOM.
  */
-function getWelcomeMessage() {
-  console.log('Fetching the welcome message.');
+function getJsonMessage() {
+  console.log('Fetching the json message.');
 
   // The fetch() function returns a Promise because the request is asynchronous.
   const responsePromise = fetch('/data');
