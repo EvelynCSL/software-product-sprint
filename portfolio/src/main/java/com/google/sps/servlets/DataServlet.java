@@ -14,9 +14,7 @@
 
 package com.google.sps.servlets;
 
-import com.google.gson.Gson;
 import java.util.Arrays;
-import java.util.List;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,23 +25,33 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
-    List<String> favouriteFruits = Arrays.asList("Mango", "Strawberry", "Grapes");
-
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
        
-        //converts the arrayList to Json using convertToJsonUsingGson
-        String json = convertToJsonUsingGson(favouriteFruits);
-
-        // Send the JSON as the response
-        response.setContentType("application/json;");
-        response.getWriter().println(json);
     }
 
-    private String convertToJsonUsingGson(List<String> list) {
-        Gson gson = new Gson();
-        String json = gson.toJson(list);
-        return json;
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        // Get the input from the form.
+        String text = getParameter(request, "text-input", "");
+
+        // Break the text into individual words.
+        String[] words = text.split("\\s*,\\s*");
+
+        // Respond with the result.
+        response.setContentType("text/html;");
+        response.getWriter().println(Arrays.toString(words));
+    }
+
+    /**
+    * @return the request parameter, or the default value if the parameter
+    *         was not specified by the client
+    */
+    private String getParameter(HttpServletRequest request, String name, String defaultValue) {
+        String value = request.getParameter(name);
+        if (value == null) {
+        return defaultValue;
+        }
+        return value;
     }
 
 }
