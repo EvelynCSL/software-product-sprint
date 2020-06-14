@@ -43,7 +43,7 @@ public class DataServlet extends HttpServlet {
         PreparedQuery results = datastore.prepare(query);
 
         List<String> comments = new ArrayList<>();
-        
+
         for (Entity entity : results.asIterable()) {
             String title = (String) entity.getProperty("title");
             comments.add(title);
@@ -57,7 +57,7 @@ public class DataServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         // Get the input from the form.
-        String text = getParameter(request, "text-input", "");
+        String text = getParameter(request, "comment", "");
 
         // Break the text into individual words.
         String[] words = text.split("\\s*,\\s*");
