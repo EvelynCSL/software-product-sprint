@@ -45,7 +45,9 @@ public class DataServlet extends HttpServlet {
 
         for (Entity entity : results.asIterable()) {
             String title = (String) entity.getProperty("title");
-            comments.add(title);
+            if(!(title.isBlank())){
+                comments.add(title);
+            }
         }
 
         Gson gson = new Gson();
