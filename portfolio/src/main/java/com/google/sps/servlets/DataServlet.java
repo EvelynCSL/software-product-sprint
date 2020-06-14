@@ -14,8 +14,15 @@
 
 package com.google.sps.servlets;
 
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.PreparedQuery;
+import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.gson.Gson;
 import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
@@ -27,23 +34,57 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
-    List<String> favouriteFruits = Arrays.asList("Mango", "Strawberry", "Grapes");
-
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-       
-        //converts the arrayList to Json using convertToJsonUsingGson
-        String json = convertToJsonUsingGson(favouriteFruits);
+        Query query = new Query("comment").addSort("timestamp", SortDirection.DESCENDING);
+        
+        DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+        PreparedQuery results = datastore.prepare(query);
 
-        // Send the JSON as the response
+        List<String> comments = new ArrayList<>();
+
+        for (Entity entity : results.asIterable()) {
+            String title = (String) entity.getProperty("title");
+            comments.add(title);
+        }
+
+        Gson gson = new Gson();
+
         response.setContentType("application/json;");
-        response.getWriter().println(json);
+        response.getWriter().println(gson.toJson(comments));
     }
 
-    private String convertToJsonUsingGson(List<String> list) {
-        Gson gson = new Gson();
-        String json = gson.toJson(list);
-        return json;
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        // Get the input from the form.
+        String text = getParameter(request, "comment", "");
+
+        // Break the text into individual words.
+        String[] words = text.split("\\s*,\\s*");
+
+        // Respond with the result.
+        response.setContentType("text/html;");
+        response.getWriter().println(Arrays.toString(words));
+
+        long timestamp = System.currentTimeMillis();
+
+        Entity commentEntity = new Entity("comment");
+        commentEntity.setProperty("title", text);
+        commentEntity.setProperty("timestamp", timestamp);
+
+        DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+        datastore.put(commentEntity);
+    }
+
+    /**
+    * @return the request parameter, or the default value if the parameter
+    *         was not specified by the client
+    */
+    private String getParameter(HttpServletRequest request, String name, String defaultValue) {
+        String value = request.getParameter(name);
+        if (value == null) {
+        return defaultValue;
+        }
+        return value;
     }
 
 }
