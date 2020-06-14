@@ -17,6 +17,10 @@ package com.google.sps.servlets;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.PreparedQuery;
+import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.SortDirection;
+import com.google.gson.Gson;
 import java.util.Arrays;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
@@ -30,7 +34,7 @@ public class DataServlet extends HttpServlet {
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-       
+
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -46,12 +50,12 @@ public class DataServlet extends HttpServlet {
 
         long timestamp = System.currentTimeMillis();
 
-        Entity taskEntity = new Entity("Task");
-        taskEntity.setProperty("title", text);
-        taskEntity.setProperty("timestamp", timestamp);
+        Entity commentEntity = new Entity("comment");
+        commentEntity.setProperty("title", text);
+        commentEntity.setProperty("timestamp", timestamp);
 
         DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-        datastore.put(taskEntity);
+        datastore.put(commentEntity);
     }
 
     /**
