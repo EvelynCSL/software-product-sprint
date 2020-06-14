@@ -14,6 +14,9 @@
 
 package com.google.sps.servlets;
 
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
 import java.util.Arrays;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
@@ -40,6 +43,15 @@ public class DataServlet extends HttpServlet {
         // Respond with the result.
         response.setContentType("text/html;");
         response.getWriter().println(Arrays.toString(words));
+
+        long timestamp = System.currentTimeMillis();
+
+        Entity taskEntity = new Entity("Task");
+        taskEntity.setProperty("title", text);
+        taskEntity.setProperty("timestamp", timestamp);
+
+        DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+        datastore.put(taskEntity);
     }
 
     /**
