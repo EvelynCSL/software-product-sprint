@@ -45,7 +45,7 @@ public class DataServlet extends HttpServlet {
 
         for (Entity entity : results.asIterable()) {
             String title = (String) entity.getProperty("title");
-            if(!(title.isBlank())){
+            if(!title.isBlank()){
                 comments.add(title);
             }
         }
