@@ -38,7 +38,19 @@
 
                 <input type="submit"/>
             </form>
+
+            <br/>
+
+            <form action="/data">
+                <label for="languageCode">Choose a language:</label>
+                <select id="languageCode" name="languageCode" onchange='this.form.submit()'>
+                    <option value="zh">Chinese</option>
+                    <option value="en">English</option>
+                    <option value="ko">Korean</option>
+                    <option value="ja">Japanese</option>
+                </select>
+                <noscript><input type="submit" value="Submit"></noscript>
+            </form>
         </div>
-        
     </body>
 </html>
