@@ -1,44 +1,54 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>My Portfolio</title>
-        <link rel="stylesheet" href="style.css">
-        <script src="script.js"></script>
-    </head>
+  <head>
+    <meta charset="UTF-8">
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+  </head>
 
-    <body onload="getJsonMessage()">
-        <div id="content">
-            <h1><center>Evelyn Chee</center></h1>
-            <center><img src="images/avatar.jpg" width="200"/></center>
-            
-            <p>
-                Currently a SMU Information Systems undergraduate majoring in Software Development.<br>
-            </p>
+  <body onload="getJsonMessage()">
+    <div id="content">
+      <h1><center>Evelyn Chee</center></h1>
+      <center><img src="images/avatar.jpg" width="200"/></center>
+      
+      <p>
+        Currently a SMU Information Systems undergraduate majoring in Software Development.<br>
+      </p>
 
-            <a href="https://www.linkedin.com/in/evelyn-chee-11378517b/">Check out my LinkedIn!</a><br>
-            <a href="https://github.com/EvelynCSL">Check out my github!</a>
+      <a href="https://www.linkedin.com/in/evelyn-chee-11378517b/">Check out my LinkedIn!</a><br>
+      <a href="https://github.com/EvelynCSL">Check out my github!</a>
 
-            <p>
-                I am a huge fan of disney, especially the quotes!<br>
-                Click here to get a random one :><br>
-            </p>
+      <p>
+        I am a huge fan of disney, especially the quotes!<br>
+        Click here to get a random one :><br>
+      </p>
 
-            <button onclick="addRandomQuote()">Surprise</button>
-            <div id="quotes-container"></div>
+      <button onclick="addRandomQuote()">Surprise</button>
+      <div id="quotes-container"></div>
 
-            <br/>
-            <div id="message-container"></div>
-            <br/>
+      <form action = "/data" method="POST">
+        <p>Ideas for my next drawing (Separate the suggestions with a comma):</p>
+        <textarea name="comment"></textarea>
+        <br/><br/>
 
-            <form action = "/data" method="POST">
-                <p>Ideas for my next drawing (Separate the suggestions with a comma):</p>
-                <textarea name="comment"></textarea>
-                <br/><br/>
+        <input type="submit"/>
+      </form>
 
-                <input type="submit"/>
-            </form>
-        </div>
-        
-    </body>
+      <br/>
+      <div id="message-container"></div>
+      <br/>
+
+      <form action="/data">
+        <label for="languageCode">Choose a language:</label>
+        <select id="languageCode" name="languageCode" onchange='this.form.submit()'>
+          <option value="en">English</option>
+          <option value="ms">Bahasa Melayu</option>
+          <option value="de">German</option>
+          <option value="es">Spanish</option>
+        </select>
+        <noscript><input type="submit" value="Submit"></noscript>
+      </form>
+    </div>
+  </body>
 </html>
