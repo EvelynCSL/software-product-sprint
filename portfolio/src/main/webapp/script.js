@@ -42,6 +42,8 @@ function getJsonMessage() {
   // The fetch() function returns a Promise because the request is asynchronous.
   const responsePromise = fetch('/data');
 
+  console.log(responsePromise);
+
   // When the request is complete, pass the response into handleResponse().
   responsePromise.then(handleResponse);
 }
@@ -66,6 +68,28 @@ function handleResponse(response) {
 function addMessageToDom(message) {
   console.log('Adding message to dom: ' + message);
 
+  var comment = message.substring(1,message.length-2).split(",");
+  var text = "";
+  console.log(comment);
+
   const messageContainer = document.getElementById('message-container');
-  messageContainer.innerHTML = message;
+  
+  // for (var i = 0; i < comment.length ; i++) {
+  //   eachComment = comment.substring(1,comment.length);
+  //   text += eachComment + "<br>";
+  // }
+
+  comment.forEach(function(item) {
+    item = item.replace(/\"/ig, '');
+    text += item + "<br>";
+  })
+
+  console.log(text);
+  
+  messageContainer.innerHTML = text;
+
+}
+
+function myFunction(item) {
+  document.getElementById("message-container").innerHTML += item + "<br>";
 }
