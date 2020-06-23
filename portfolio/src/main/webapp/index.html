@@ -8,47 +8,88 @@
   </head>
 
   <body onload="getJsonMessage()">
-    <div id="content">
-      <h1><center>Evelyn Chee</center></h1>
-      <center><img src="images/avatar.jpg" width="200"/></center>
-      
-      <p>
-        Currently a SMU Information Systems undergraduate majoring in Software Development.<br>
-      </p>
+    <nav>
+      <ul>
+        <!-- <img src="images/stitchIcon.png" style="height:1.1cm; padding:1px">
+        <li>Evelyn</li> -->
+        <img src="images/nameLogo.png" style="height:46px; padding:3px; display:inline-block; margin-top:5px">
+      </ul>
+    </nav>
 
-      <a href="https://www.linkedin.com/in/evelyn-chee-11378517b/">Check out my LinkedIn!</a><br>
-      <a href="https://github.com/EvelynCSL">Check out my github!</a>
-
-      <p>
-        I am a huge fan of disney, especially the quotes!<br>
-        Click here to get a random one :><br>
-      </p>
-
-      <button onclick="addRandomQuote()">Surprise</button>
-      <div id="quotes-container"></div>
-
-      <form action = "/data" method="POST">
-        <p>Ideas for my next drawing (Separate the suggestions with a comma):</p>
-        <textarea name="comment"></textarea>
-        <br/><br/>
-
-        <input type="submit"/>
-      </form>
-
-      <br/>
-      <div id="message-container"></div>
-      <br/>
-
-      <form action="/data">
-        <label for="languageCode">Choose a language:</label>
-        <select id="languageCode" name="languageCode" onchange='this.form.submit()'>
-          <option value="en">English</option>
-          <option value="ms">Bahasa Melayu</option>
-          <option value="de">German</option>
-          <option value="es">Spanish</option>
-        </select>
-        <noscript><input type="submit" value="Submit"></noscript>
-      </form>
+    <div class = "header-container">
+      <div><img src="images/headerIllustration.png" style="height: 13cm; align: left;"></div>
+      <div style="padding-right: 115px"><h2>Currently a SMU Information Systems<br />
+          undergraduate majoring in<br />
+          Software Development.</h2></div>
     </div>
+
+    <div class = "interest">
+      <div class = "interest-container">
+        <div>
+          <img src="images/webDevelopment.png" style="width: 170px; padding-top: 60px" ><br />
+          Web Development
+        </div>
+        <div>
+          <img src="images/webDesign.png" style="width: 170px; padding-top: 60px"><br />
+          Web Design
+        </div>
+        <div>
+          <img src="images/automatedTesting.png" style="width: 170px; padding-top: 60px"><br />
+          Automated Testing
+        </div>
+        <div>
+          <img src="images/illustration.png" style="width: 170px; padding-top: 60px"><br />
+          Illustration
+        </div>
+      </div>
+    </div>
+
+    <div class = "input-container">
+      <div>
+        <div class = "randomQuote">
+            I am a huge fan of disney, especially the quotes!<br />
+            Click here to get a random one :><br />
+
+          <button onclick="addRandomQuote()">Surprise</button>
+          <div id="quotes-container"></div>
+        </div>
+      </div>
+      <div>
+        <div class = "comment">
+          <form action = "/data" method="POST">
+            Ideas for my next drawing <br />
+            (Separate the suggestions with a comma):
+            <br /><br />
+            <textarea name="comment"></textarea>
+            <br />
+            <input type="submit"/>
+          </form>
+        </div>
+      </div>
+    </div>
+    
+    <div class = "display-container">
+      <div><h3>Previous Illustrations</h3></div>
+      <div>
+        <center><h3>Possibly Next Illustration</h3></center>
+        <form action="/data" style="float: right; padding-right: 15px;">
+          <select id="languageCode" name="languageCode" onchange='this.form.submit()'>
+            <option value="en" selected>English</option>
+            <option value="ms">Bahasa Melayu</option>
+            <option value="de">German</option>
+            <option value="es">Spanish</option>
+          </select>
+          <noscript><input type="submit" value="Submit"></noscript>
+        </form><br>
+        <div id="message-container"></div>
+      </div>
+    </div>
+
+    <footer class = "footer">
+      <a href="https://github.com/EvelynCSL"><img src="images/gitHubIcon.png" style="width:70px; height:auto; margin: 0px 25px 25px"></a>
+      <a href="https://www.linkedin.com/in/evelyn-chee-11378517b/"><img src="images/linkedInIcon.png" style="width:70px; height:auto; margin: 0px 25px 25px"></a>
+      <a href="mailto:evelynchee.15@gmail.com"><img src="images/gmailIcon.png" style="width:70px; height:auto; margin: 0px 25px 25px"></a>
+    </footer>
+    
   </body>
 </html>
