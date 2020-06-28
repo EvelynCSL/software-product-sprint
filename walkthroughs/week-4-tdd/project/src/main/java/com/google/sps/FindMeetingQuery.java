@@ -40,19 +40,14 @@ public final class FindMeetingQuery {
     }else if(durationOfRequest > MINUTES_IN_A_DAY){
       return Arrays.asList();
     }else{
-      for (String attendee : attendeesOfRequest){
-        System.out.println(attendee);
-        for (Event event : events){
+      for(String attendee : attendeesOfRequest){
+        for(Event event : events){
           if(event.getAttendees().contains(attendee)){
-            System.out.println(event.getWhen());
             unavailableTimeRange.add(event.getWhen());
           }
         }
       }
-      System.out.println(unavailableTimeRange);
-      // Collections.sort(unavailableTimeRange, ORDER_BY_START);
-
-      for (TimeRange timerange : unavailableTimeRange){
+      for(TimeRange timerange : unavailableTimeRange){
         if(previousTimeRange.contains(timerange)){
         }else if(previousTimeRange.overlaps(timerange)){
           TimeRange newTimeRange = TimeRange.fromStartEnd(previousTimeRange.start(),timerange.end(),false);
@@ -64,10 +59,7 @@ public final class FindMeetingQuery {
           previousTimeRange = timerange;
         }
       }
-      System.out.println(unavailableTimeRange);
-      System.out.println(unavailableNoOverlap);
-
-      for (TimeRange timerange : unavailableNoOverlap){
+      for(TimeRange timerange : unavailableNoOverlap){
         if(endOfTimeRange == 0){
           TimeRange trval = TimeRange.fromStartEnd(START_OF_DAY,timerange.start(),false);
           if(trval.duration() != 0 && trval.duration() >= durationOfRequest){
@@ -86,7 +78,6 @@ public final class FindMeetingQuery {
         returnCollection.add(trval);
       }
     }
-
     return returnCollection;
   }
 }
