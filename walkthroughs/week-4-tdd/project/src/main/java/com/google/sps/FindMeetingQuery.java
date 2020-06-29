@@ -29,7 +29,7 @@ public final class FindMeetingQuery {
     TimeRange previousTimeRange = TimeRange.fromStartEnd(0,0,true);
     Collection<TimeRange> unavailableTimeRange = new ArrayList<>();
     Collection<TimeRange> unavailableNoOverlap = new ArrayList<>();
-    Collection<TimeRange> returnCollection = new ArrayList<>();
+    Collection<TimeRange> availableTimeRanges = new ArrayList<>();
 
     long durationOfRequest = request.getDuration();
     Collection<String> attendeesOfRequest = request.getAttendees();
@@ -37,7 +37,7 @@ public final class FindMeetingQuery {
     if(attendeesOfRequest.isEmpty()){
       return Arrays.asList(TimeRange.WHOLE_DAY);
     }
-    if(durationOfRequest > MINUTES_IN_A_DAY){
+    if(durationOfRequest > MINUTES_IN_A_DAY || durationOfRequest <= 0){
       return Arrays.asList();
     }
     
@@ -50,34 +50,29 @@ public final class FindMeetingQuery {
     }
     for(TimeRange timerange : unavailableTimeRange){
       if(previousTimeRange.contains(timerange)){
-      }else if(previousTimeRange.overlaps(timerange)){
+        continue;
+      }
+      if(previousTimeRange.overlaps(timerange)){
         TimeRange newTimeRange = TimeRange.fromStartEnd(previousTimeRange.start(),timerange.end(),false);
         unavailableNoOverlap.add(newTimeRange);
         unavailableNoOverlap.remove(previousTimeRange);
         previousTimeRange = newTimeRange;
-      }else{
-        unavailableNoOverlap.add(timerange);
-        previousTimeRange = timerange;
+        continue;
       }
+      unavailableNoOverlap.add(timerange);
+      previousTimeRange = timerange;
     }
     for(TimeRange timerange : unavailableNoOverlap){
-      if(endOfTimeRange == 0){
-        TimeRange trval = TimeRange.fromStartEnd(START_OF_DAY,timerange.start(),false);
-        if(trval.duration() != 0 && trval.duration() >= durationOfRequest){
-          returnCollection.add(trval);
-        }
-      }else{
         TimeRange trval = TimeRange.fromStartEnd(endOfTimeRange,timerange.start(),false);
-        if(trval.duration() != 0 && trval.duration() >= durationOfRequest){
-          returnCollection.add(trval);
+        if(trval.duration() >= durationOfRequest){
+          availableTimeRanges.add(trval);
         }
-      }
       endOfTimeRange = timerange.end();
     }
     TimeRange trval = TimeRange.fromStartEnd(endOfTimeRange,END_OF_DAY,true);
-    if(trval.duration() != 0 && trval.duration() >= durationOfRequest){
-      returnCollection.add(trval);
+    if(trval.duration() >= durationOfRequest){
+      availableTimeRanges.add(trval);
     }
-    return returnCollection;
+    return availableTimeRanges;
   }
 }
